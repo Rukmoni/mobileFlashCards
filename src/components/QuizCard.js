@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import { View, StyleSheet, Animated, TouchableWithoutFeedback, Text } from 'react-native';
 
 const QuizCard = ({question,mode}) => {
-  console.log("QuizCard::",question);
+ // console.log("QuizCard::",question);
   const [currentQuestion,setCurrentQuestion]=useState('');
   const [currentAnswer,setCurrentAnswer]=useState('');
   const [currentMode,setCurrentMode]=useState('');
@@ -13,12 +13,12 @@ const QuizCard = ({question,mode}) => {
     }
   
       setCurrentMode(mode)
-      flipCard();
+     // flipCard();
     
     
   },[question,mode]) 
 
-        let animatedValue = new Animated.Value(0);
+/*         let animatedValue = new Animated.Value(0);
         let value = 0;
 
         animatedValue.addListener(({ value }) => {
@@ -56,9 +56,9 @@ const QuizCard = ({question,mode}) => {
         let elevationBack = animatedValue.interpolate({
           inputRange: [155, 180],
           outputRange: [0, 10]
-          })
+          }) */
 
-        const flipCard = () => {
+       /*  const flipCard = () => {
           console.log("prees")
           console.log("v",this.value)
           console.log("anim",currentMode)
@@ -81,26 +81,27 @@ const QuizCard = ({question,mode}) => {
               useNativeDriver:true,
             }).start();
           }
-        }
+        } */
 
-
-        const frontAnimatedStyle = {
-        transform: [{ rotateY: frontInterpolate}]
-        }
-        const backAnimatedStyle = {
-        transform: [{ rotateY: backInterpolate }]
-        }
 
 
     return (
     /*   <TouchableWithoutFeedback onPress={() => flipCard()} > */
           <View>
-                <Animated.View style={[frontAnimatedStyle, styles.paperFront,{elevation: elevationFront}, {opacity: frontOpacity}]}>
-                {/*   <Text style={{fontSize: 20,paddingTop: 8, paddingLeft: 8, color: 'black',lineHeight: 20}}>
-                    Title Front {value} - <Text style={{fontSize: 8}}>KPI</Text>
-                  </Text>
-                    <View style={{position: "absolute", paddingTop: 3, right: 8}}>
-                    </View> */}
+          {currentMode==="question"?
+           <View style={styles.paperFront}>
+           <Text style={styles.title}>Question</Text>
+                    <Text style={styles.text}>{currentQuestion}</Text>
+                    </View>
+        :
+                    <View style={styles.paperBack}>
+                    <Text style={styles.title}>Answer</Text>
+                    <Text style={styles.text}>{currentAnswer}</Text>
+                    </View>
+          }
+
+           {/*      <Animated.View style={[frontAnimatedStyle, styles.paperFront,{elevation: elevationFront}, {opacity: frontOpacity}]}>
+               
                     <View style={{flex:1,backgroundColor:'yellow',alignItems:'center',justifyContent:'center'}}>
                     <Text style={styles.text}>{currentQuestion}</Text>
                     </View>
@@ -108,31 +109,61 @@ const QuizCard = ({question,mode}) => {
 
                 <Animated.View style={[backAnimatedStyle, styles.paperBack, {elevation: elevationBack}, {opacity: backOpacity}]}>
                   <Text>{currentAnswer}</Text>
-                </Animated.View>
+                </Animated.View> */}
             </View>
      /*  </TouchableWithoutFeedback> */
     );
 }
 
 const styles = StyleSheet.create({
+
     paperFront : {
       marginHorizontal: 15,
       backgroundColor: "#16A085",
-      minHeight: 400,
+      minHeight: 300,
       borderRadius: 5,
       marginBottom: 15,
+      shadowColor: '#00000021',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 12,
+    justifyContent:'center',
+    alignItems:'center'
 
     },
     paperBack : {
-      top: -415,
+     
       marginHorizontal: 15,
-      backgroundColor: "white",
-      minHeight: 400,
+      backgroundColor: '#ECF0F1',
+      minHeight: 300,
       borderRadius: 5,
       marginBottom: 15,
+      shadowColor: '#00000021',
+      shadowOffset: {
+        width: 0,
+        height: 6,
+      },
+      shadowOpacity: 0.37,
+      shadowRadius: 7.49,
+      elevation: 12,
+      justifyContent:'center',
+      alignItems:'center'
+
+    },
+    title:{
+      padding:10,
+      fontSize:22,
+      fontWeight:'bold',
+      color:'orange'
 
     },
     text:{
+      padding:15,
+      fontSize:18,
       color:'#000'
     }
 });

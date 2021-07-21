@@ -13,7 +13,7 @@ const DeckCard=({deck})=>{
 }
 
 const Decks=({data})=>{
-    console.log("data:::",data)
+   /// console.log("data:::",data)
     if(data.length===0){
         return ("No Decks to display!")
     }
@@ -22,7 +22,7 @@ const Decks=({data})=>{
         return(
             <SafeAreaView style={styles.container}>
               <ScrollView >
-            {data.map((_deck)=><DeckCard key={_deck.id} deck={_deck}/>)}
+            {data.map((_deck)=><DeckCard  deck={_deck}/>)}
                </ScrollView>
             </SafeAreaView>
         )

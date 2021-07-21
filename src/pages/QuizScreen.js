@@ -3,33 +3,43 @@ import React, { useEffect,useState } from "react";
 import QuizCard from '../components/QuizCard';
 import Button from '../components/Buttons';
 
-const QuizScreen=({route})=> {
+const QuizScreen=({navigation,route})=> {
    const deck=route.params.deckData;
   const [questions,setQuestions]=useState([]);
   const [currentQuestion,setCurrentQuestion]=useState(0);
   const [currentMode,setCurrentMode]=useState('question');
    useEffect(()=>{
-    console.log("route::",deck.questions)
+    //console.log("route::",deck.questions)
     setQuestions(deck.questions);
         
 },[deck]);
-const NextQuestion=()=>{
-  /*   let next=currentQuestion+1;
+const showAnswer=()=>{
+    setCurrentMode('answer');
+
+
+}
+const NextQuestion=(res)=>{
+    //console.log("result",res)
+     let next=currentQuestion+1;
     if(next<questions.length){
     setCurrentQuestion(next);
-    } */
-    setCurrentMode('back');
+    setCurrentMode('question')
+    } else{
+        console.log("ResultScreen")
+    }
 }
+  
         return(
             <View style={styles.container}>
-                <Text>Quiz page2</Text>
+                
                 <View style={styles.quizCardContainer}>
                 <QuizCard question={questions[currentQuestion]} mode={currentMode}/>
                 </View>
                 <View style={styles.buttonContainer}>
-                <Button title="Submit" style={{width:200}} onPress={NextQuestion}/>
-                <Button title="Correct" style={{width:200,backgroundColor:'green'}}/>
-                <Button title="Wrong" style={{width:200,backgroundColor:'red'}}/>
+                <Text>{currentQuestion+1} / {questions.length}</Text>
+                <Button title="Show Answer" style={{width:200}} onPress={showAnswer} disabled={currentMode!=="question"}/>
+                <Button title="Correct" style={{width:200,backgroundColor:'green'}} onPress={()=>NextQuestion("correct")} disabled={currentMode==="question"}/>
+                <Button title="Wrong" style={{width:200,backgroundColor:'red'}} onPress={()=>NextQuestion("wrong")} disabled={currentMode==="question"}/>
                 </View>
             </View>
         )
@@ -44,7 +54,7 @@ const styles=StyleSheet.create({
     },
     quizCardContainer:{
         marginTop:10,
-        height:450,
+        height:350,
     },
     buttonContainer:{
         flex:0.5,

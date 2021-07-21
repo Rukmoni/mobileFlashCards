@@ -135,6 +135,7 @@ export async function getDecks() {
 }
 
 export async function addNewDeck(title) {
+  console.log("addNewDEck")
   const id = generateUID();
   const deck = {
     id: id,
