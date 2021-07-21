@@ -14,7 +14,7 @@ const [decks,setDecks]=useState([])
 
  },[])
  useEffect(()=>{
-console.log("decksState,D",DecksState)
+
 setLoadState(DecksState.loading)
 setDecks(Object.values(DecksState.decks));
  },[DecksState]);

@@ -10,7 +10,7 @@ const [decks,setDecks]=useState([])
  const dispatch=useDispatch();
  const DecksState=useSelector((state)=>state.decks);
  useEffect(()=>{
-console.log("decksState,D",DecksState)
+//console.log("decksState,D",DecksState)
 setLoadState(DecksState.loading)
 let _decksArr=Object.values(DecksState.decks).map((_deck)=>({
     id:_deck.id,
