@@ -22,7 +22,7 @@ const Decks=({data})=>{
         return(
             <SafeAreaView style={styles.container}>
               <ScrollView >
-            {data.map((_deck)=><DeckCard  deck={_deck}/>)}
+            {data.map((_deck)=><DeckCard key={_deck.id} deck={_deck}/>)}
                </ScrollView>
             </SafeAreaView>
         )

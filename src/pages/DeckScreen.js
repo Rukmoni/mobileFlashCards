@@ -17,11 +17,11 @@ const DeckScreen=({route})=> {
                 <TouchableOpacity onPress={()=>navigation.navigate("QuizScreen",{deckData:deck})}>
                     <Text> Start Quiz</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>navigation.navigate("AddNewCard")}>
+                <TouchableOpacity onPress={()=>navigation.navigate("AddNewCard",{deckData:deck})}>
                     <Text> Add New Card</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <Text> Delete Card</Text>
+                    <Text> Delete Deck</Text>
                 </TouchableOpacity>
             </View>
         )

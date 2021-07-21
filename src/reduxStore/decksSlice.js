@@ -14,6 +14,20 @@ export const AddNewDeckToApi=createAsyncThunk('decks/addNewDeck',async(payload)=
     return response;
 
 })
+
+export const AddNewCardToApi=createAsyncThunk('decks/addNewCardToDeck',async(payload)=>{
+    console.log("createAsyncThunk",payload)
+    const response=await api.addCardToDeck(payload.deckId,payload.card);
+    return response;
+
+})
+
+/* export const deleteDeck=createAsyncThunk('decks/deleteDeck',async(payload)=>{
+    //console.log("createAsyncThunk",payload)
+    const response=await api.addCardToDeck(payload.deckId,payload.card);
+    return response;
+
+}) */
 /* export const getDecksfromApi=createAsyncThunk('decks/getDecks',async(thunkAPI)=>{
     const response=await api.getDecks();
     return response;
@@ -32,8 +46,8 @@ const decksSlice=createSlice({
             state.decks=action.payload
         }, 
         addToDeck:(state,action)=>{
-            console.log("action.payload",action.payload)
-          state.decks.push(action.payload);
+            console.log("action.payload",action.payload.deckId)
+          state.decks[action.payload.deckId].push(action.payload.card);
         }
     },
    extraReducers:(builder)=>{
@@ -53,7 +67,15 @@ const decksSlice=createSlice({
             console.log("Fullfilleddd", state.decks)
             state.decks.push(action.payload);
            // console.log("Fullfilled",action)
-        })   
+        })  
+        .addCase(AddNewCardToApi.fulfilled,(state,action)=>{
+            console.log("AddNewCardToApi Fullfilleddd", action.meta.arg.deckId)
+            console.log("AddNewCardToApi Fullfilleddd",state.decks[action.meta.arg.deckId] )
+            state.decks.find(deck=>deck.id===action.meta.arg.deckId)?.questions.push(action.payload);
+            //deck.questions.push(action.payload);
+            //state.decks.push(action.payload);
+           // console.log("Fullfilled",action)
+        })  
        
     } 
 });

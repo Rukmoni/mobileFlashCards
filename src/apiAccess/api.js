@@ -153,6 +153,7 @@ export async function addNewDeck(title) {
 }
 
 export async function addCardToDeck(deckId, card) {
+  console.log("From API",card)
   const results = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
   if (results) {
     const data = JSON.parse(results);
