@@ -4,16 +4,26 @@ import {useDispatch} from 'react-redux';
 import Button from '../components/Buttons';
 import {AddNewDeckToApi} from '../reduxStore/decksSlice';
 
+
 const AddNewDeck=({navigation})=> {
     const [title,setTitle]=useState('');
+    const [disabled,setDisabled]=useState(true);
    const dispatch=useDispatch();
+   
 
   const addDeck=()=>{
+    setTitle('');
     console.log("AddNewDeckToApi")
     dispatch(AddNewDeckToApi(title)).then(()=>{
         console.log("SERVER RESPONSE");
         navigation.navigate("Home")
     });
+  }
+
+  const onChange=(msg)=>{
+      let status=msg.length>0;
+      setDisabled(!status);
+    setTitle(msg)
   }
         return(
             <View style={styles.container}>
@@ -23,7 +33,7 @@ const AddNewDeck=({navigation})=> {
                 
                 value={title}
                 placeholderTextColor = "#696969"
-                onChangeText={msg => setTitle(msg)}
+                onChangeText={msg => onChange(msg)}
                 blurOnSubmit={false}
                 
                 placeholder="Type Deck Title"
@@ -31,7 +41,7 @@ const AddNewDeck=({navigation})=> {
                
             </View>
             <View style={styles.buttonContainer}>
-                <Button title="Add New Deck" onPress={addDeck}/>
+                <Button title="Add New Deck" onPress={addDeck} disabled={disabled}/>
                 </View>
             </View>
         )
