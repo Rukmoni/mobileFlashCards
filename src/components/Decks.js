@@ -6,18 +6,17 @@ const DeckCard = ({ deck }) => {
 	const navigation = useNavigation();
 	return (
 		<TouchableOpacity onPress={() => navigation.navigate('DeckScreen', { deckId: deck.id })}>
-		<View style={styles.card}>
-		 <View>
-				<Text style={styles.name}>{deck.title}</Text>
-				<Text style={styles.count}>{deck.questions.length} cards</Text>
+			<View style={styles.card}>
+				<View>
+					<Text style={styles.name}>{deck.title}</Text>
+					<Text style={styles.count}>{deck.questions.length} cards</Text>
 				</View>
-		</View>
+			</View>
 		</TouchableOpacity>
 	);
 };
 
 const Decks = ({ data }) => {
-	/// console.log("data:::",data)
 	if (data.length === 0) {
 		return 'No Decks to display!';
 	}

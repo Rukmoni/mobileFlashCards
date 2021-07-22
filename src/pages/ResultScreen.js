@@ -1,13 +1,8 @@
 import {View,Text,StyleSheet} from "react-native";
-
 import React from "react";
-
 import Button from '../components/Buttons';
  
 const ResultScreen=({navigation,route})=> {
- 
-  
-   console.log("ResultScreen",route.params)
         return(
             <View style={styles.container}>
            

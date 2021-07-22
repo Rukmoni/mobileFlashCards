@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet ,ScrollView} from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import QuizCard from '../components/QuizCard';
 import Button from '../components/Buttons';
@@ -11,21 +11,18 @@ const QuizScreen = ({ navigation, route }) => {
 	const [score, setScore] = useState(0);
 
 	useEffect(() => {
-		//console.log("route::",deck.questions)
 		setQuestions(deck.questions);
 	}, [deck]);
 	const showAnswer = () => {
 		setCurrentMode('answer');
 	};
 	const NextQuestion = (res) => {
-		//console.log("result",res)
 		if (res === 'correct') {
 			if (!score) {
 				setScore(1);
 			} else {
 				let newscore = score + 1;
 				setScore(newscore);
-				console.log('result', score);
 			}
 		}
 		let next = currentQuestion + 1;
@@ -81,8 +78,6 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		flex: 0.5,
 		alignItems: 'center',
-	
-		
 	},
 });
 

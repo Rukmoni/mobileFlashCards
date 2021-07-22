@@ -9,25 +9,18 @@ const AddNewCard = ({ navigation, route }) => {
 	const [question, setQuestion] = useState('');
 	const [answer, setAnswer] = useState('');
 	const [isinValid, setIsinValid] = useState(true);
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    console.log("Enabled",answer.length)
-    if(question.length>0&&answer.length>0){
-    
-      setIsinValid(false);
-    }
-    else{
-      setIsinValid(true);
-    }
-
-  },[question,answer])
+	const dispatch = useDispatch();
+	useEffect(() => {
+		if (question.length > 0 && answer.length > 0) {
+			setIsinValid(false);
+		} else {
+			setIsinValid(true);
+		}
+	}, [question, answer]);
 
 	const addCard = () => {
-		console.log('AddNewCardToApi');
 		let card = { question: question, answer: answer };
 		dispatch(AddNewCardToApi({ deckId: deck.id, card: { question: 'new ', answer: 'ans' } })).then((res) => {
-			console.log('SERVER RESPONSE', res);
-
 			navigation.navigate('DeckScreen', { deckId: deck.id });
 		});
 	};
@@ -58,7 +51,7 @@ const AddNewCard = ({ navigation, route }) => {
 				</View>
 			</View>
 			<View style={styles.buttonContainer}>
-				<Button title="Add New Deck" onPress={addCard} disabled={isinValid}/>
+				<Button title="Add New Deck" onPress={addCard} disabled={isinValid} />
 			</View>
 		</View>
 	);
