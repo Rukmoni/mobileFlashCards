@@ -1,18 +1,20 @@
 import {View,Text,StyleSheet} from "react-native";
-import {useSelector} from "react-redux";
+import {useSelector,useDispatch} from "react-redux";
 import React, { useEffect,useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
 import Button from '../components/Buttons';
+import {DeleteDeckFromApi} from '../reduxStore/decksSlice';
 
 const DeckScreen=({route})=> {
    const decksState=useSelector((state)=>state.decks);
+   const dispatch=useDispatch();
    const [deck,setDeck]=useState(null);
    const [quizDisabled,setQuizDisabled]=useState(true);
     const deckId=route.params.deckId;
    useEffect(()=>{
        let d=decksState.decks.find(_deck=>_deck.id===deckId)
-       if(d.questions.length>0){
+       if(d?.questions.length>0){
         setQuizDisabled(false);
        }
        setDeck(d);
@@ -20,6 +22,11 @@ const DeckScreen=({route})=> {
 
    },[decksState])
     const navigation=useNavigation();
+    const deleteDeck=()=>{
+ dispatch(DeleteDeckFromApi(deckId)).then(()=>{
+     navigation.navigate("Home")
+ })
+    }
    // console.log("DecksScreen",deck)
         return(
             <View style={styles.container}>
@@ -29,7 +36,7 @@ const DeckScreen=({route})=> {
                 <Text style={styles.count}>{deck.questions.length} cards</Text>
                 <Button title="Start Quiz" onPress={()=>navigation.navigate("QuizScreen",{deckData:deck})} disabled={quizDisabled}/>
                 <Button title="Add New Card" onPress={()=>navigation.navigate("AddNewCard",{deckData:deck})}/>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={deleteDeck}>
                     <Text style={styles.deleteText}> Delete Deck</Text>
                 </TouchableOpacity>
                 </View>

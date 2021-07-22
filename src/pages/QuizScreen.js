@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet ,ScrollView} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import QuizCard from '../components/QuizCard';
 import Button from '../components/Buttons';
@@ -38,7 +38,7 @@ const QuizScreen = ({ navigation, route }) => {
 	};
 
 	return (
-		<View style={styles.container}>
+		<ScrollView style={styles.container}>
 			<View style={styles.quizCardContainer}>
 				<QuizCard question={questions[currentQuestion]} mode={currentMode} />
 			</View>
@@ -65,7 +65,7 @@ const QuizScreen = ({ navigation, route }) => {
 					disabled={currentMode === 'question'}
 				/>
 			</View>
-		</View>
+		</ScrollView>
 	);
 };
 
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		flex: 0.5,
 		alignItems: 'center',
-		justifyContent: 'space-evenly',
-		marginTop: 10,
+	
+		
 	},
 });
 

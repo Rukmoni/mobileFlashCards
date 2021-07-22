@@ -21,6 +21,12 @@ export const AddNewCardToApi=createAsyncThunk('decks/addNewCardToDeck',async(pay
     return response;
 
 })
+export const DeleteDeckFromApi=createAsyncThunk('decks/deleteDeck',async(payload)=>{
+    
+    const response=await api.removeDeck(payload);
+    return response;
+
+})
 
 /* export const deleteDeck=createAsyncThunk('decks/deleteDeck',async(payload)=>{
     //console.log("createAsyncThunk",payload)
@@ -72,10 +78,14 @@ const decksSlice=createSlice({
             console.log("AddNewCardToApi Fullfilleddd", action.meta.arg.deckId)
             console.log("AddNewCardToApi Fullfilleddd",state.decks[action.meta.arg.deckId] )
             state.decks.find(deck=>deck.id===action.meta.arg.deckId)?.questions.push(action.payload);
-            //deck.questions.push(action.payload);
-            //state.decks.push(action.payload);
-           // console.log("Fullfilled",action)
-        })  
+         
+        }) 
+        .addCase(DeleteDeckFromApi.fulfilled,(state,action)=>{
+           // state.decks.splice(state.decks.findIndex((deck)=>deck.id===action.payload),1);
+           //state.decks = action.payload;//state.decks.filter((deck) => deck.id !== action.payload);
+       console.log("DeleteDeckFromApi",action.payload)
+       state.decks=Object.values(action.payload);
+        }) 
        
     } 
 });
