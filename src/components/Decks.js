@@ -5,12 +5,14 @@ import { useNavigation } from '@react-navigation/native';
 const DeckCard = ({ deck }) => {
 	const navigation = useNavigation();
 	return (
+		<TouchableOpacity onPress={() => navigation.navigate('DeckScreen', { deckId: deck.id })}>
 		<View style={styles.card}>
-			<TouchableOpacity onPress={() => navigation.navigate('DeckScreen', { deckId: deck.id })}>
+		 <View>
 				<Text style={styles.name}>{deck.title}</Text>
 				<Text style={styles.count}>{deck.questions.length} cards</Text>
-			</TouchableOpacity>
+				</View>
 		</View>
+		</TouchableOpacity>
 	);
 };
 

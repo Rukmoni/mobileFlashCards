@@ -67,9 +67,7 @@ export default function AppNavigator() {
 				<Stack.Screen name="QuizScreen" component={QuizScreen} />
 				<Stack.Screen name="AddNewCard" component={AddNewCard} />
 				<Stack.Screen
-					navigationOptions={{
-						headerLeft: null,
-					}}
+					 options={{headerShown: false}}
 					name="ResultScreen"
 					component={ResultScreen}
 				/>

@@ -20,16 +20,13 @@ const ResultScreen=({navigation,route})=> {
         )
 
 }
-ResultScreen.navigationOptions = {
-    headerTitle: 'Trucks Screen',
-    headerLeft: null,
-};
+
 const styles=StyleSheet.create({
     container:{
       flex: 1, 
       justifyContent: 'center',
        alignItems: 'center', 
-       backgroundColor: "#ebf0f7"
+       backgroundColor: "#2C3E50"
   
     },
     infoContainer:{
@@ -42,7 +39,7 @@ const styles=StyleSheet.create({
 		fontSize: 18,
 	
 		
-		color: 'black',
+		color: 'white',
         fontWeight: 'bold',
         marginVertical:5,
 	},
@@ -51,7 +48,7 @@ const styles=StyleSheet.create({
 		fontSize: 14,
 
 		alignSelf: 'center',
-        color: 'black',
+        color: 'white',
         marginBottom:20,
     },
     deleteText:{
