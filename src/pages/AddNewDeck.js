@@ -46,7 +46,7 @@ export default AddNewDeck;
 const styles=StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:'yellow',
+        backgroundColor:'#ebf0f7',
         justifyContent:'center',
         alignItems:'center',
         padding:20
